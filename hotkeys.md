@@ -19,7 +19,7 @@ redis-cli hotkeys实现是一个很消耗cpu 的操作
 4. 如下会通过代码详细分析实现过程
 ```
 
-# redis-cli hotkeys 分析工具
+# redis-cli hotkeys 使用
 * server配置
 
 ```sh
