@@ -320,6 +320,58 @@ unsigned long LFUGetTimeInMinutes(void) {
 
 * redis-cli的hotkeys就是通过lfu，获取key的访问频率进行最大top k排序计算出hotkeys
 
+## lru 和 lfu 算法压测对比
+
+* maxmemory 50m
+* 同一个服务端不同算法
+
+### lfu
+
+```sh
+$ ./redis-cli -p 6501 --lru-test 1000000
+135000 Gets/sec | Hits: 134655 (99.74%) | Misses: 345 (0.26%)
+139000 Gets/sec | Hits: 138622 (99.73%) | Misses: 378 (0.27%)
+139250 Gets/sec | Hits: 138876 (99.73%) | Misses: 374 (0.27%)
+130500 Gets/sec | Hits: 130146 (99.73%) | Misses: 354 (0.27%)
+135000 Gets/sec | Hits: 134660 (99.75%) | Misses: 340 (0.25%)
+133750 Gets/sec | Hits: 133396 (99.74%) | Misses: 354 (0.26%)
+134250 Gets/sec | Hits: 133912 (99.75%) | Misses: 338 (0.25%)
+132250 Gets/sec | Hits: 131930 (99.76%) | Misses: 320 (0.24%)
+128750 Gets/sec | Hits: 128435 (99.76%) | Misses: 315 (0.24%)
+133000 Gets/sec | Hits: 132682 (99.76%) | Misses: 318 (0.24%)
+132000 Gets/sec | Hits: 131649 (99.73%) | Misses: 351 (0.27%)
+133750 Gets/sec | Hits: 133422 (99.75%) | Misses: 328 (0.25%)
+134250 Gets/sec | Hits: 133922 (99.76%) | Misses: 328 (0.24%)
+131000 Gets/sec | Hits: 130676 (99.75%) | Misses: 324 (0.25%)
+135500 Gets/sec | Hits: 135143 (99.74%) | Misses: 357 (0.26%)
+134000 Gets/sec | Hits: 133687 (99.77%) | Misses: 313 (0.23%)
+```
+
+### lru
+
+```sh
+$ ./redis-cli -p 6501 --lru-test 1000000
+122250 Gets/sec | Hits: 121906 (99.72%) | Misses: 344 (0.28%)
+121000 Gets/sec | Hits: 120651 (99.71%) | Misses: 349 (0.29%)
+126250 Gets/sec | Hits: 125903 (99.73%) | Misses: 347 (0.27%)
+128750 Gets/sec | Hits: 128355 (99.69%) | Misses: 395 (0.31%)
+129250 Gets/sec | Hits: 128883 (99.72%) | Misses: 367 (0.28%)
+124500 Gets/sec | Hits: 124148 (99.72%) | Misses: 352 (0.28%)
+126750 Gets/sec | Hits: 126355 (99.69%) | Misses: 395 (0.31%)
+125750 Gets/sec | Hits: 125399 (99.72%) | Misses: 351 (0.28%)
+132250 Gets/sec | Hits: 131868 (99.71%) | Misses: 382 (0.29%)
+133250 Gets/sec | Hits: 132867 (99.71%) | Misses: 383 (0.29%)
+118250 Gets/sec | Hits: 117912 (99.71%) | Misses: 338 (0.29%)
+129000 Gets/sec | Hits: 128632 (99.71%) | Misses: 368 (0.29%)
+129500 Gets/sec | Hits: 129175 (99.75%) | Misses: 325 (0.25%)
+125750 Gets/sec | Hits: 125398 (99.72%) | Misses: 352 (0.28%)
+```
+
+### 总结
+
+* 从Gets/sec 和 Misses来看 lfu更优
+* 由于机器性能不够，没有进行极限压测，数据仅供参考
+
 # 文档链接
 
 * https://redis.io/topics/lru-cache
