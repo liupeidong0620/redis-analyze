@@ -248,8 +248,11 @@ lfu-log-factor 10
 # 默认为1
 # 衰减时间，每一分钟counter - 1
 lfu-decay-time 1
-lfu-log-factor对访问次数影响
 ```
+
+lfu-log-factor对访问次数影响
+
+* factor越大随着访问次数增加counter变化的越缓慢
 
 ```sh
 * factor 对 counter 大小影响
