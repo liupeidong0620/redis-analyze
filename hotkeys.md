@@ -172,6 +172,7 @@ maxmemory-samples 5
 ```
 
 redis-lru算法效果图
+
 ![avatar](https://redis.io/images/redisdoc/lru_comparison.png)
 
 * Theoretical LRU: 理想中的LRU算法
