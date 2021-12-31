@@ -169,10 +169,12 @@ unsigned int LRU_CLOCK(void) {
 ```sh
 # 随机采样点，默认是五个
 maxmemory-samples 5
-redis-lru算法效果图
 ```
 
-Theoretical LRU: 理想中的LRU算法
+redis-lru算法效果图
+![avatar](https://redis.io/images/redisdoc/lru_comparison.png)
+
+* Theoretical LRU: 理想中的LRU算法
 * Approx LRU Redis 2.8 5 Samples （旧版本的算法实现）
 * Approx LRU Redis 3.0 5 Samples (新版本的算法实现)
 * Approx LRU Redis 3.0 10 Samples （抽样数增加）
