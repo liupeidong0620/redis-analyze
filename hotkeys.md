@@ -180,6 +180,7 @@ redis-lru算法效果图
 * Approx LRU Redis 2.8 5 Samples （旧版本的算法实现）
 * Approx LRU Redis 3.0 5 Samples (新版本的算法实现)
 * Approx LRU Redis 3.0 10 Samples （抽样数增加）
+
 图片颜色
 
 * 浅灰色带是被驱逐的对象。
